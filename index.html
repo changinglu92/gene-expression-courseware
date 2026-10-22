@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>基因指导蛋白质的合成 · 高中生物学 必修2 第4章第1节</title>
+<meta name="description" content="人教版高中生物学必修2《遗传与进化》第4章第1节 基因指导蛋白质的合成 · 3D互动课件">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="bg-particles"></canvas>
+<div class="fx-scanlines"></div>
+<div class="fx-vignette"></div>
+
+<header id="topbar">
+  <div class="brand" data-go="home">
+    <div class="brand-logo"><span></span><span></span></div>
+    <div class="brand-text">
+      <b>基因的表达</b>
+      <small>必修2 · 第4章 第1节 · GENE EXPRESSION LAB</small>
+    </div>
+  </div>
+  <nav id="mainnav"></nav>
+  <div class="top-hud">
+    <span class="hud-dot"></span><span id="hud-clock">00:00</span>
+  </div>
+</header>
+
+<main id="stage">
+
+  <!-- ================= 1 首页 ================= -->
+  <section class="sec" id="sec-home" data-title="首页">
+    <div class="three-host" id="home-3d"></div>
+    <div class="home-overlay">
+      <div class="home-tag">人教版 · 高中生物学 必修2《遗传与进化》 · 第4章 基因的表达</div>
+      <h1 class="home-title"><span class="glitch" data-text="基因指导蛋白质的合成">基因指导蛋白质的合成</span></h1>
+      <div class="home-sub">FROM GENE TO PROTEIN · 一段DNA，如何“写”出一个蛋白质？</div>
+      <div class="home-keys">
+        <span>转录</span><i></i><span>翻译</span><i></i><span>遗传密码</span><i></i><span>中心法则</span>
+      </div>
+      <div class="home-btns">
+        <button class="btn-neon big" data-go="dive">进入细胞 <em>→</em></button>
+        <button class="btn-ghost" data-go="mission">直接闯关</button>
+      </div>
+      <div class="home-goals glass">
+        <div class="hud-title">学习目标 / OBJECTIVES</div>
+        <ol>
+          <li>概述遗传信息的<b>转录</b>过程：场所、模板、原料、酶与碱基互补配对。</li>
+          <li>阐明遗传信息的<b>翻译</b>过程，说出密码子、反密码子与tRNA的关系。</li>
+          <li>运用数学方法分析碱基与氨基酸的对应关系，理解<b>密码子的简并</b>。</li>
+          <li>概述<b>中心法则</b>，认同生命是物质、能量和信息的统一体。</li>
+        </ol>
+      </div>
+      <div class="home-meta">深圳实验学校高中园 · 高中生物学公开课</div>
+    </div>
+    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+  </section>
+
+  <!-- ================= 2 深入细胞 ================= -->
+  <section class="sec" id="sec-dive" data-title="深入细胞">
+    <div class="three-host" id="dive-3d"></div>
+    <div class="sec-head">
+      <div class="sec-icon">◎</div>
+      <div><b>细胞纵深观察器</b><small>CELL DEPTH EXPLORER · 从细胞一路下潜到碱基对</small></div>
+      <div class="sec-head-right"><span class="big-num" id="dive-num">01</span><span class="dim">/ 05 层</span></div>
+    </div>
+    <div class="dive-left">
+      <div class="dive-layer-tag" id="dive-tag">第 1 层 · CELL</div>
+      <h2 class="dive-title" id="dive-title">细胞</h2>
+      <div class="dive-subtitle" id="dive-subtitle"></div>
+      <div class="dive-scale"><span>尺度</span><b id="dive-scale"></b></div>
+      <ul class="dive-timeline" id="dive-timeline"></ul>
+    </div>
+    <div class="dive-card glass" id="dive-card">
+      <div class="hud-title">这一层发生了什么</div>
+      <div id="dive-card-body"></div>
+      <div class="dive-q answer-block" id="dive-q"></div>
+    </div>
+    <div class="dive-bottom">
+      <div class="dots" id="dive-dots"></div>
+      <div class="dive-hint">滚轮 / ↑↓ 方向键 · 向下深入 &nbsp;|&nbsp; 拖拽旋转</div>
+      <div class="dive-arrows"><button class="round-btn" id="dive-up">↑</button><button class="round-btn" id="dive-down">↓</button></div>
+    </div>
+  </section>
+
+  <!-- ================= 3 转录实验室 ================= -->
+  <section class="sec" id="sec-tx" data-title="转录实验室">
+    <div class="three-host" id="tx-3d"></div>
+    <div class="sec-head">
+      <div class="sec-icon">⌬</div>
+      <div><b>转录实验室</b><small>TRANSCRIPTION LAB · 以DNA的一条链为模板合成RNA</small></div>
+      <div class="sec-head-right"><span class="dim">进度</span><span class="big-num" id="tx-count">0</span><span class="dim">/ 18 nt</span></div>
+    </div>
+    <aside class="lab-info glass">
+      <div class="hud-title">实验参数 · 转录</div>
+      <dl class="kv">
+        <dt>场所</dt><dd>主要在<b>细胞核</b>（线粒体、叶绿体中也可发生）</dd>
+        <dt>模板</dt><dd>DNA的<b>一条链</b>（模板链）</dd>
+        <dt>原料</dt><dd>4种游离的<b>核糖核苷酸</b>（A、U、G、C）</dd>
+        <dt>酶</dt><dd><b>RNA聚合酶</b>（解开双螺旋 + 连接核糖核苷酸）</dd>
+        <dt>能量</dt><dd>ATP 等</dd>
+        <dt>配对</dt><dd class="pairs"><span class="b bA">A</span>–<span class="b bU">U</span> <span class="b bT">T</span>–<span class="b bA">A</span> <span class="b bG">G</span>–<span class="b bC">C</span> <span class="b bC">C</span>–<span class="b bG">G</span></dd>
+        <dt>产物</dt><dd>RNA（本例为 mRNA）</dd>
+      </dl>
+      <div class="legend">
+        <span><i class="sw" style="background:#3fa9ff"></i>模板链 3'→5'</span>
+        <span><i class="sw" style="background:#5a6b85"></i>非模板链（编码链）</span>
+        <span><i class="sw" style="background:#b98cff"></i>新合成的 RNA 5'→3'</span>
+      </div>
+    </aside>
+    <div class="lab-status glass" id="tx-status"></div>
+    <div class="lab-dock glass">
+      <div class="dock-row">
+        <div class="mode-switch" id="tx-mode">
+          <button data-mode="manual" class="on">学生动手配对</button>
+          <button data-mode="auto">自动演示</button>
+        </div>
+        <div class="ctrls">
+          <button class="ctl" id="tx-prev" title="上一步 ←">⏮</button>
+          <button class="ctl main" id="tx-play" title="播放/暂停 空格">▶</button>
+          <button class="ctl" id="tx-next" title="下一步 →">⏭</button>
+          <button class="ctl" id="tx-reset" title="重置 R">↺</button>
+          <label class="speed">速度 <input type="range" id="tx-speed" min="0.5" max="3" step="0.5" value="1"><b id="tx-speed-v">1×</b></label>
+        </div>
+      </div>
+      <div class="dock-row pick-row">
+        <div class="pick-target">
+          <small>模板链当前碱基</small>
+          <div class="target-base" id="tx-target">T</div>
+          <div class="drop-slot" id="tx-slot"><span>拖到这里</span></div>
+        </div>
+        <div class="pick-pool" id="tx-pool"></div>
+        <div class="mrna-out">
+          <small>mRNA 输出 <em>5'→3'</em></small>
+          <div class="seq-line" id="tx-mrna"></div>
+          <small class="dim">非模板链（编码链）5'→3'：<span class="mono" id="tx-coding"></span></small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4 翻译工厂 ================= -->
+  <section class="sec" id="sec-tl" data-title="翻译工厂">
+    <div class="three-host" id="tl-3d"></div>
+    <div class="sec-head">
+      <div class="sec-icon">⬡</div>
+      <div><b>翻译工厂</b><small>TRANSLATION FACTORY · 以mRNA为模板合成具有一定氨基酸顺序的蛋白质</small></div>
+      <div class="sec-head-right"><span class="dim">步骤</span><span class="big-num" id="tl-stepn">1</span><span class="dim" id="tl-stept">/ 16</span></div>
+    </div>
+    <aside class="lab-info glass">
+      <div class="hud-title">生产线参数 · 翻译</div>
+      <dl class="kv">
+        <dt>场所</dt><dd>细胞质中的<b>核糖体</b></dd>
+        <dt>模板</dt><dd><b>mRNA</b></dd>
+        <dt>原料</dt><dd>游离在细胞质中的<b>21种氨基酸</b></dd>
+        <dt>搬运</dt><dd><b>tRNA</b>：一端携带氨基酸，另一端的<b>反密码子</b>与密码子配对</dd>
+        <dt>配对</dt><dd class="pairs"><span class="b bA">A</span>–<span class="b bU">U</span> <span class="b bU">U</span>–<span class="b bA">A</span> <span class="b bG">G</span>–<span class="b bC">C</span> <span class="b bC">C</span>–<span class="b bG">G</span></dd>
+        <dt>方向</dt><dd>核糖体沿 mRNA <b>5'→3'</b> 移动</dd>
+        <dt>产物</dt><dd>多肽链（经加工成为蛋白质）</dd>
+      </dl>
+      <div class="note">教材将核糖体上的tRNA结合部位简化为 <b>位点1</b>、<b>位点2</b>（对应 P 位、A 位）；E 位为拓展内容。</div>
+    </aside>
+    <div class="lab-status glass" id="tl-status"></div>
+    <div class="lab-dock glass">
+      <div class="dock-row">
+        <div class="mode-switch" id="tl-mode">
+          <button data-mode="manual" class="on">学生选择 tRNA</button>
+          <button data-mode="auto">自动演示</button>
+        </div>
+        <div class="ctrls">
+          <button class="ctl" id="tl-prev" title="上一步 ←">⏮</button>
+          <button class="ctl main" id="tl-play" title="播放/暂停 空格">▶</button>
+          <button class="ctl" id="tl-next" title="下一步 →">⏭</button>
+          <button class="ctl" id="tl-reset" title="重置 R">↺</button>
+          <label class="speed">速度 <input type="range" id="tl-speed" min="0.5" max="3" step="0.5" value="1"><b id="tl-speed-v">1×</b></label>
+        </div>
+      </div>
+      <div class="dock-row pick-row">
+        <div class="pick-target">
+          <small id="tl-codon-label">当前密码子 5'→3'</small>
+          <div class="target-base codon" id="tl-codon">AUG</div>
+        </div>
+        <div class="trna-cards" id="tl-cards"></div>
+        <div class="mrna-out">
+          <small>多肽链 <em>N端 → C端</em></small>
+          <div class="pep-line" id="tl-pep"></div>
+          <small class="dim">mRNA：<span class="mono" id="tl-mrna"></span></small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5 密码子解码台 ================= -->
+  <section class="sec scroll" id="sec-codon" data-title="密码子解码台">
+    <div class="sec-head">
+      <div class="sec-icon">⌗</div>
+      <div><b>密码子解码台</b><small>CODON DECODER · 64种密码子 · 标准遗传密码表</small></div>
+      <div class="sec-head-right codon-why">
+        <span class="why"><b>4¹</b>=4</span><span class="why"><b>4²</b>=16</span><span class="why ok"><b>4³</b>=64 ≥ 21</span>
+      </div>
+    </div>
+    <div class="codon-layout">
+      <div class="codon-main glass">
+        <div class="codon-tools">
+          <input id="codon-search" placeholder="搜索：密码子（如 AUG）、氨基酸（如 亮氨酸 / Leu）…" autocomplete="off">
+          <div class="chip-group" id="codon-filters">
+            <button data-f="start">起始密码子</button>
+            <button data-f="stop">终止密码子</button>
+            <button data-f="deg">按简并数着色</button>
+            <button data-f="clear">清除</button>
+          </div>
+        </div>
+        <div class="codon-table-wrap"><table class="codon-table" id="codon-table"></table></div>
+        <div class="codon-foot" id="codon-foot">点击任意密码子或氨基酸，查看它的所有密码子（简并性）。</div>
+      </div>
+      <div class="codon-side">
+        <div class="glass panel">
+          <div class="hud-title">mRNA 解码器</div>
+          <textarea id="dec-input" spellcheck="false">GCAUGCACUGGAAAGGUUAAGC</textarea>
+          <div class="dec-opts">
+            <label><input type="checkbox" id="dec-dna"> 输入的是 DNA 模板链 (3'→5')</label>
+            <button class="btn-mini" id="dec-run">解码 ▶</button>
+          </div>
+          <div class="dec-out" id="dec-out"></div>
+        </div>
+        <div class="glass panel">
+          <div class="hud-title">解码挑战 · 60 秒 <span class="game-score" id="game-score">0 分</span></div>
+          <div class="game-box" id="game-box">
+            <div class="game-idle">看密码子，选出它决定的氨基酸。<br>答对 +10，连对有加成。</div>
+            <button class="btn-neon" id="game-start">开始挑战</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6 对比与易错 ================= -->
+  <section class="sec scroll" id="sec-cmp" data-title="对比与易错">
+    <div class="sec-head">
+      <div class="sec-icon">⇄</div>
+      <div><b>对比与易错</b><small>COMPARE &amp; PITFALLS · 原核 vs 真核 · 三大过程 · 易错辨析 · 数量计算</small></div>
+      <div class="sec-head-right"><div class="tabs" id="cmp-tabs">
+        <button data-t="pe" class="on">原核 vs 真核</button>
+        <button data-t="three">复制·转录·翻译</button>
+        <button data-t="trap">易错辨析</button>
+        <button data-t="calc">6 : 3 : 1</button>
+      </div></div>
+    </div>
+    <div class="cmp-body">
+      <div class="cmp-pane on" data-p="pe">
+        <div class="pe-grid">
+          <div class="glass pe-card">
+            <div class="hud-title">真核细胞 · 先转录，后翻译</div>
+            <svg class="pe-svg" id="svg-euk" viewBox="0 0 520 330"></svg>
+            <p>有核膜：转录主要在<b>细胞核</b>，mRNA 通过<b>核孔</b>进入细胞质，再与核糖体结合翻译——转录与翻译在<b>时间和空间上分隔</b>。</p>
+          </div>
+          <div class="glass pe-card">
+            <div class="hud-title">原核细胞 · 边转录，边翻译</div>
+            <svg class="pe-svg" id="svg-pro" viewBox="0 0 520 330"></svg>
+            <p>无核膜：转录尚未结束，核糖体就结合到 mRNA 上开始翻译。一个 mRNA 上可相继结合<b>多个核糖体</b>（多聚核糖体），少量 mRNA 即可迅速合成大量蛋白质。</p>
+          </div>
+        </div>
+        <table class="cmp-table glass">
+          <tr><th>比较项目</th><th>真核细胞</th><th>原核细胞</th></tr>
+          <tr><td>转录场所</td><td>主要在细胞核（线粒体、叶绿体中也有）</td><td>拟核区 / 细胞质</td></tr>
+          <tr><td>翻译场所</td><td>细胞质中的核糖体</td><td>细胞质中的核糖体</td></tr>
+          <tr><td>时空关系</td><td>先转录，后翻译（核膜分隔）</td><td>边转录，边翻译</td></tr>
+          <tr><td>mRNA去向</td><td>经核孔进入细胞质</td><td>无需穿过核膜</td></tr>
+          <tr><td>多聚核糖体</td><td colspan="2" class="c">都有：一个mRNA上相继结合多个核糖体，合成的多条肽链氨基酸序列<b>相同</b>（模板相同）</td></tr>
+        </table>
+      </div>
+
+      <div class="cmp-pane" data-p="three">
+        <table class="cmp-table big glass" id="three-table"></table>
+        <div class="three-tip">点击表格中的 <span class="answer-inline">蒙版格</span> 逐个揭示（课堂提问用），或按 <kbd>H</kbd> 显示/隐藏全部答案。</div>
+      </div>
+
+      <div class="cmp-pane" data-p="trap">
+        <div class="trap-grid" id="trap-grid"></div>
+      </div>
+
+      <div class="cmp-pane" data-p="calc">
+        <div class="calc-wrap glass">
+          <div class="calc-ctrl">
+            <label>肽链中氨基酸数 <b>n</b> = <input type="number" id="calc-n" value="4" min="1" max="999"></label>
+            <input type="range" id="calc-range" min="1" max="12" value="4">
+            <label>肽链条数 <b>m</b> = <input type="number" id="calc-m" value="1" min="1" max="9"></label>
+          </div>
+          <div class="calc-viz" id="calc-viz"></div>
+          <div class="calc-res" id="calc-res"></div>
+          <div class="note">注意：基因中存在不编码氨基酸的序列，mRNA上还有终止密码子等，所以 6 : 3 : 1 只能用于“<b>至少</b>”“<b>最多</b>”类问题。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7 中心法则 ================= -->
+  <section class="sec" id="sec-dogma" data-title="中心法则">
+    <div class="sec-head">
+      <div class="sec-icon">✦</div>
+      <div><b>中心法则</b><small>CENTRAL DOGMA · 遗传信息的流动方向（克里克，1957年提出，后不断补充完善）</small></div>
+      <div class="sec-head-right"><div class="tabs" id="dogma-tabs">
+        <button data-o="all" class="on">完整中心法则</button>
+        <button data-o="crick">1957 最初内容</button>
+        <button data-o="cell">细胞生物</button>
+        <button data-o="rnavirus">RNA复制病毒</button>
+        <button data-o="retro">逆转录病毒</button>
+      </div></div>
+    </div>
+    <div class="dogma-layout">
+      <div class="dogma-stage glass"><svg id="dogma-svg" viewBox="0 0 900 560"></svg></div>
+      <div class="dogma-side glass" id="dogma-info"></div>
+    </div>
+    <div class="dogma-quote">DNA、RNA 是信息的载体 · 蛋白质是信息的表达产物 · ATP 为信息的流动提供能量 —— <b>生命是物质、能量和信息的统一体</b></div>
+  </section>
+
+  <!-- ================= 8 闯关挑战 ================= -->
+  <section class="sec" id="sec-mission" data-title="闯关挑战">
+    <div class="mission-bg"></div>
+    <div class="sec-head">
+      <div class="sec-icon">⚠</div>
+      <div><b>细胞危机：找出失控的蛋白质</b><small>MISSION · 收集线索 · 推理破案</small></div>
+      <div class="sec-head-right"><span class="dim">得分</span><span class="big-num" id="ms-score">0</span><span class="dim" id="ms-prog">关卡 0 / 8</span></div>
+    </div>
+    <div class="mission-body" id="mission-body"></div>
+  </section>
+
+</main>
+
+<!-- Teacher control bar -->
+<div id="teacherbar" class="glass">
+  <button id="tb-prev" title="上一步 (←)">◀ 上一步</button>
+  <button id="tb-next" class="primary" title="下一步 (→)">下一步 ▶</button>
+  <span class="sep"></span>
+  <button id="tb-reset" title="重置本节 (R)">↺ 重置</button>
+  <button id="tb-answer" title="隐藏/显示答案 (H)">◐ 隐藏答案</button>
+  <button id="tb-full" title="全屏 (F)">⛶ 全屏</button>
+  <button id="tb-help" title="快捷键 (?)">⌨</button>
+  <button id="tb-fold" title="收起">—</button>
+</div>
+<button id="teacherbar-open" class="glass" title="展开教师控制条">☰ 教师控制</button>
+
+<div id="help-modal" class="modal">
+  <div class="modal-box glass">
+    <div class="hud-title">键盘快捷键 · 教师操作</div>
+    <table class="keys">
+      <tr><td><kbd>1</kbd>–<kbd>8</kbd></td><td>切换栏目</td></tr>
+      <tr><td><kbd>→</kbd> / <kbd>PageDown</kbd></td><td>下一步（翻页笔可用）</td></tr>
+      <tr><td><kbd>←</kbd> / <kbd>PageUp</kbd></td><td>上一步</td></tr>
+      <tr><td><kbd>↑</kbd> <kbd>↓</kbd> / 滚轮</td><td>深入细胞：切换层级</td></tr>
+      <tr><td><kbd>空格</kbd></td><td>转录 / 翻译：播放 / 暂停</td></tr>
+      <tr><td><kbd>R</kbd></td><td>重置当前栏目</td></tr>
+      <tr><td><kbd>H</kbd></td><td>隐藏 / 显示答案（蒙版）</td></tr>
+      <tr><td><kbd>F</kbd></td><td>全屏</td></tr>
+      <tr><td><kbd>T</kbd></td><td>显示 / 收起教师控制条</td></tr>
+      <tr><td><kbd>?</kbd></td><td>本帮助</td></tr>
+    </table>
+    <button class="btn-neon" onclick="document.getElementById('help-modal').classList.remove('show')">知道了</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div id="noscript-3d" class="hidden">3D 引擎加载失败，已切换为简化模式。</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/core.js"></script>
+<script src="js/sec-home.js"></script>
+<script src="js/sec-dive.js"></script>
+<script src="js/sec-tx.js"></script>
+<script src="js/sec-tl.js"></script>
+<script src="js/sec-codon.js"></script>
+<script src="js/sec-compare.js"></script>
+<script src="js/sec-dogma.js"></script>
+<script src="js/sec-mission.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
