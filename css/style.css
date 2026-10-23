@@ -455,3 +455,106 @@ body.hide-answers .answer-block.revealed{filter:none;opacity:1}
   .dive-card{font-size:.92em}
   .trap{height:190px}
 }
+
+
+/* ========== POLISH PASS · 投屏级增强 ========== */
+
+/* --- Home AAA CTA --- */
+.home-badge-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:.4em}
+.home-live{display:inline-flex;align-items:center;gap:8px;padding:.35em .9em;border-radius:999px;border:1px solid rgba(0,255,198,.45);color:var(--tl);font-size:.78em;letter-spacing:.18em;background:rgba(0,255,198,.08);box-shadow:0 0 18px rgba(0,255,198,.25)}
+.home-mission-chip{align-self:flex-start;margin:.55em 0 .15em;padding:.25em .85em;border-left:3px solid var(--am);background:linear-gradient(90deg,rgba(255,200,87,.18),transparent);color:var(--am);font-family:monospace;letter-spacing:.22em;font-size:.82em;text-shadow:0 0 12px rgba(255,200,87,.5)}
+.home-title{font-size:clamp(42px,5.4vw,108px)!important;filter:drop-shadow(0 0 28px rgba(34,230,255,.35))}
+.home-sub{font-size:1.12em;text-shadow:0 0 20px rgba(34,230,255,.25)}
+.home-btns{gap:18px;margin-top:.2em}
+.btn-neon.cta-pulse{position:relative;overflow:visible;font-size:1.35em!important;padding:1em 2.6em!important;box-shadow:0 0 32px rgba(34,230,255,.65),0 0 0 1px rgba(255,255,255,.35) inset,0 8px 28px rgba(0,0,0,.45)}
+.btn-neon.cta-pulse .cta-ring{position:absolute;inset:-8px;border-radius:999px;border:2px solid rgba(34,230,255,.55);animation:ctaRing 2.2s ease-out infinite;pointer-events:none}
+@keyframes ctaRing{0%{transform:scale(.96);opacity:.9}70%{transform:scale(1.12);opacity:0}100%{opacity:0}}
+.btn-ghost.big-ghost{padding:.95em 1.8em;font-size:1.05em;border-color:rgba(255,63,142,.55);color:#ff8fb6;background:rgba(255,63,142,.08);letter-spacing:.14em}
+.btn-ghost.big-ghost:hover{background:rgba(255,63,142,.2);color:#fff;border-color:var(--mg);box-shadow:0 0 22px rgba(255,63,142,.45)}
+.home-hint{margin-top:1.1em;color:var(--dim);font-size:.82em;letter-spacing:.12em}
+.home-hint kbd{margin:0 .2em}
+.home-goals{box-shadow:0 0 0 1px rgba(34,230,255,.25),0 16px 48px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08)}
+
+/* --- Transcription: bigger classroom touch targets + feedback --- */
+.nt-chip{width:92px!important;height:92px!important;border-radius:16px;border-width:2px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.nt-chip b{font-size:2.35em!important}
+.nt-chip small{font-size:.68em!important;margin-top:6px}
+.nt-chip:active{transform:scale(.96)}
+.nt-chip.good{animation:chipGood .7s ease;box-shadow:0 0 0 3px var(--tl),0 0 36px rgba(0,255,198,.85)!important;background:rgba(0,255,198,.18)!important}
+.nt-chip.bad{animation:chipBad .55s ease;box-shadow:0 0 0 3px var(--mg),0 0 36px rgba(255,63,142,.75)!important;background:rgba(255,63,142,.16)!important}
+@keyframes chipGood{0%{transform:scale(1)}35%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes chipBad{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px) rotate(-3deg)}40%{transform:translateX(10px) rotate(3deg)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
+.drop-slot{width:5.6em!important;height:4em!important;font-size:.78em!important;border-width:3px;border-radius:12px}
+.drop-slot.hot,.drop-slot.wait{border-color:var(--tl);background:rgba(0,255,198,.14);color:#fff;box-shadow:0 0 22px rgba(0,255,198,.45);animation:slotPulse 1.2s ease-in-out infinite}
+@keyframes slotPulse{50%{box-shadow:0 0 32px rgba(0,255,198,.7);transform:scale(1.04)}}
+.target-base{font-size:2.1em!important;min-width:2.2em;height:1.65em!important;box-shadow:0 0 24px rgba(63,169,255,.55)}
+.lab-status.flash{animation:flashOk .75s!important;border-color:var(--tl)!important}
+.lab-status.err{animation:shake .5s!important;border-color:var(--mg)!important;box-shadow:0 0 28px rgba(255,63,142,.35)}
+@keyframes flashOk{0%{box-shadow:0 0 0 2px var(--tl),0 0 48px rgba(0,255,198,.7);background:rgba(0,255,198,.12)}100%{}}
+.seq-line .nt{animation:popGlow .45s}
+@keyframes popGlow{0%{transform:scale(0);box-shadow:0 0 0 0 rgba(185,140,255,.8)}70%{transform:scale(1.15);box-shadow:0 0 18px rgba(185,140,255,.9)}100%{transform:none;box-shadow:none}}
+
+/* --- Translation: A/P/E badges + dramatic peptide --- */
+.site-badges{grid-column:1 / -1;display:flex;gap:6px;justify-content:center;margin-bottom:2px}
+.site-b{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-width:3.2em;padding:.2em .45em;border-radius:8px;border:1px solid rgba(255,255,255,.18);font-family:monospace;font-weight:800;font-size:1.05em;line-height:1.05;opacity:.45;transition:.25s;background:rgba(0,0,0,.35)}
+.site-b small{font-size:.55em;font-weight:500;letter-spacing:.04em;opacity:.9;margin-top:1px}
+.site-b.E{color:#bbb;border-color:rgba(180,180,180,.35)}
+.site-b.P{color:var(--am);border-color:rgba(255,200,87,.4)}
+.site-b.A{color:var(--cy);border-color:rgba(34,230,255,.4)}
+.site-b.on{opacity:1;transform:scale(1.08);box-shadow:0 0 16px currentColor}
+.site-b.P.on{background:rgba(255,200,87,.18)}
+.site-b.A.on{background:rgba(34,230,255,.18)}
+.site-b.E.on{background:rgba(180,180,180,.15)}
+.trna-card{width:168px!important;min-height:108px;padding:14px 10px 12px!important;border-width:2px}
+.trna-card .aa{font-size:.95em;padding:.25em .85em}
+.trna-card .ac{font-size:1.45em!important;margin-top:10px}
+.trna-card.good{animation:chipGood .6s}
+.trna-card.bad{animation:chipBad .5s}
+.pep-line .aa{padding:.35em .85em!important;font-size:.95em!important;box-shadow:0 0 14px rgba(255,255,255,.25);animation:pepGrow .55s cubic-bezier(.2,1.4,.3,1)}
+.pep-line .bond{width:16px!important;height:3px!important;background:linear-gradient(90deg,transparent,#fff,transparent)!important;opacity:.85;box-shadow:0 0 10px rgba(255,255,255,.6);animation:bondFlash .5s}
+@keyframes pepGrow{0%{transform:scale(0) translateY(12px);filter:brightness(2)}60%{transform:scale(1.2)}100%{transform:none;filter:none}}
+@keyframes bondFlash{0%{opacity:0;transform:scaleX(0)}100%{opacity:.85;transform:none}}
+.pep-line.grow-flash{filter:drop-shadow(0 0 18px rgba(0,255,198,.7))}
+
+/* --- Mission cinematic briefing --- */
+.ms-intro{position:relative;overflow:hidden;max-width:1040px!important;padding:42px 52px 40px!important;border:1px solid rgba(255,63,142,.35)!important;box-shadow:0 0 0 1px rgba(34,230,255,.15),0 0 60px rgba(255,63,142,.18),inset 0 0 80px rgba(255,63,142,.05)!important;text-align:left!important}
+.ms-intro::before{content:"CLASSIFIED · 机密简报";position:absolute;top:18px;right:28px;padding:.2em .7em;border:1px solid rgba(255,63,142,.55);color:var(--mg);font-family:monospace;font-size:.72em;letter-spacing:.25em;transform:rotate(6deg);opacity:.85;background:rgba(255,63,142,.08)}
+.ms-intro::after{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--mg),var(--am),var(--cy));opacity:.85}
+.ms-alert{display:inline-flex!important;align-items:center;gap:8px;padding:.45em 1.3em!important;border-width:2px!important;letter-spacing:.28em!important;box-shadow:0 0 22px rgba(255,63,142,.4);background:rgba(255,63,142,.1)}
+.ms-intro h2{text-align:center;margin:.7em 0 .5em!important;font-size:clamp(32px,3.2vw,58px)!important}
+.ms-intro > p{text-align:left!important;padding:14px 18px;border-left:3px solid var(--am);background:rgba(0,0,0,.28);border-radius:0 10px 10px 0;max-width:none!important}
+.ms-brief-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.2em 0 1em}
+.ms-brief-meta div{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.28);text-align:center}
+.ms-brief-meta b{display:block;color:var(--cy);font-family:monospace;font-size:1.15em;letter-spacing:.08em;margin-bottom:.2em}
+.ms-brief-meta span{color:var(--dim);font-size:.78em;letter-spacing:.06em}
+.ms-rooms{justify-content:flex-start!important;margin:1em 0 1.2em!important}
+.ms-rooms span{background:rgba(34,230,255,.06);border-color:rgba(34,230,255,.28)!important}
+.ms-rules{justify-content:flex-start!important;flex-wrap:wrap;gap:10px 18px!important;margin-bottom:1.6em!important}
+.ms-intro .btn-neon.big{display:block;margin:0 auto;font-size:1.2em}
+
+/* --- Teacher bar: always readable @ 1920×1080 --- */
+#teacherbar{bottom:12px!important;z-index:70!important;padding:8px 10px!important;gap:6px!important;
+  background:linear-gradient(180deg,rgba(10,28,48,.94),rgba(4,12,24,.96))!important;
+  border:1px solid rgba(34,230,255,.45)!important;
+  box-shadow:0 0 0 1px rgba(0,0,0,.5),0 8px 32px rgba(0,0,0,.65),0 0 28px rgba(34,230,255,.2)!important}
+#teacherbar .tb-label{padding:0 .7em 0 .4em;font-size:.72em;letter-spacing:.18em;color:var(--cy);text-transform:uppercase;border-right:1px solid var(--line);margin-right:4px;white-space:nowrap}
+#teacherbar button{padding:.55em 1.15em!important;font-size:.95em!important;color:#e4f6ff!important;min-height:40px}
+#teacherbar button.primary{background:linear-gradient(90deg,rgba(0,255,198,.4),rgba(34,230,255,.4))!important;box-shadow:inset 0 0 0 1px rgba(34,230,255,.75),0 0 16px rgba(34,230,255,.35)!important;font-weight:600}
+#teacherbar-open{bottom:12px!important;z-index:70!important;padding:.6em 1.1em!important;font-size:.95em!important;
+  background:rgba(8,22,38,.95)!important;border:1px solid rgba(34,230,255,.5)!important;box-shadow:0 0 18px rgba(34,230,255,.3)}
+/* Keep lab docks clear of teacher bar on 1080p */
+.lab-dock{bottom:72px!important}
+.mission-body{bottom:72px!important}
+.dive-bottom{bottom:78px!important}
+.dogma-quote{bottom:74px!important}
+
+@media (max-width:1280px){
+  .nt-chip{width:72px!important;height:72px!important}
+  .trna-card{width:128px!important}
+  .home-live,.home-hint{display:none}
+  #teacherbar .tb-label{display:none}
+}
+@media (max-height:820px){
+  .nt-chip{width:68px!important;height:68px!important}
+  .lab-dock{bottom:66px!important}
+}

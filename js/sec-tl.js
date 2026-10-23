@@ -67,21 +67,23 @@ function build(){
   large = new THREE.Mesh(new THREE.SphereGeometry(1,48,32), GE.glassMat(0x00ffc6,.13)); large.scale.set(3.6,2.2,2.1); large.position.y = 2.05; ribo.add(large);
   [small,large].forEach(m=>{ const w = new THREE.Mesh(m.geometry, new THREE.MeshBasicMaterial({color:0x22e6ff,wireframe:true,transparent:true,opacity:.07})); m.add(w); });
   ribo.add(GE.glowSprite(0x22e6ff,7,.08));
-  [['E',-1.5*CW,0x777777,'E位'],['P',-.5*CW,0xffc857,'位点1 · P'],['A',.5*CW,0x22e6ff,'位点2 · A']].forEach(([n,x,c,lab])=>{
-    const box = new THREE.Mesh(new THREE.BoxGeometry(CW*.92,2.6,1.2), new THREE.MeshBasicMaterial({color:c, transparent:true, opacity: n==='E'?.04:.07, depthWrite:false}));
-    box.position.set(x,1.65,0); ribo.add(box);
-    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(box.geometry), new THREE.LineBasicMaterial({color:c, transparent:true, opacity:n==='E'?.25:.6})); edge.position.copy(box.position); ribo.add(edge);
-    sites[n] = {box, edge, label: S.addLabel(box, lab, n==='E'?'small':(n==='P'?'warm':''), new THREE.Vector3(0,-1.75,.7))};
+  [['E',-1.5*CW,0x999999,'E 离开位'],['P',-.5*CW,0xffc857,'位点1 · P'],['A',.5*CW,0x22e6ff,'位点2 · A']].forEach(([n,x,c,lab])=>{
+    const box = new THREE.Mesh(new THREE.BoxGeometry(CW*.92,2.8,1.35), new THREE.MeshBasicMaterial({color:c, transparent:true, opacity: n==='E'?.06:.11, depthWrite:false}));
+    box.position.set(x,1.7,0); ribo.add(box);
+    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(box.geometry), new THREE.LineBasicMaterial({color:c, transparent:true, opacity:n==='E'?.4:.85})); edge.position.copy(box.position); ribo.add(edge);
+    const glow = GE.glowSprite(c, n==='E'?1.6:2.2, n==='E'?.08:.16); glow.position.set(x,1.7,0); ribo.add(glow);
+    sites[n] = {box, edge, glow, label: S.addLabel(box, lab, n==='E'?'small':(n==='P'?'warm':''), new THREE.Vector3(0,-1.95,.75))};
   });
   S.riboLabel = S.addLabel(large,'核糖体','',new THREE.Vector3(1.05,1.1,0));
   // tRNA 与氨基酸
   for(let k=0;k<K-1;k++){ const t = makeTRNA(k); t.position.set(cX(k)+5,6,3); t.visible=false; S.pivot.add(t); trnas.push(t);
-    const aa = new THREE.Group(); const sp = new THREE.Mesh(new THREE.SphereGeometry(.34,24,16), GE.mat(new THREE.Color(GE.AA_COLOR[AAS[k]]).getHex(),{emissiveIntensity:.55})); aa.add(sp);
-    const tx = GE.textSprite(AAS[k],{fs:60,h:.26,color:'#001018',depthTest:false}); tx.position.z=.36; aa.add(tx);
+    const aa = new THREE.Group(); const sp = new THREE.Mesh(new THREE.SphereGeometry(.38,24,16), GE.mat(new THREE.Color(GE.AA_COLOR[AAS[k]]).getHex(),{emissiveIntensity:.75})); aa.add(sp);
+    aa.add(GE.glowSprite(new THREE.Color(GE.AA_COLOR[AAS[k]]).getHex(), 1.4, .22));
+    const tx = GE.textSprite(AAS[k],{fs:64,h:.28,color:'#001018',depthTest:false}); tx.position.z=.4; aa.add(tx);
     aa.position.copy(t.position); aa.visible=false; S.pivot.add(aa); aaMeshes.push(aa);
     aa.userData.lab = S.addLabel(aa, GE.aaName(AAS[k]), 'small', new THREE.Vector3(.0,.55,0));
   }
-  for(let k=0;k<K-2;k++){ const b = new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,1,8), new THREE.MeshBasicMaterial({color:0xffffff})); b.visible=false; S.pivot.add(b); bonds.push(b); }
+  for(let k=0;k<K-2;k++){ const b = new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,1,10), new THREE.MeshBasicMaterial({color:0xffffff})); b.visible=false; S.pivot.add(b); bonds.push(b); }
 }
 function fade(g,a){ g.traverse(o=>{ if(o.material) o.material.opacity = (o.material.userData.base ?? 1)*a; }); }
 
@@ -94,7 +96,12 @@ function poses(t, dt){
   large.position.y = GE.lerp(large.position.y, st.released ? 3.2 : 2.05, k5*.5);
   large.position.z = GE.lerp(large.position.z, st.released ? -3 : 0, k5*.5);
   [small,large].forEach(m=>{ m.material.uniforms.uOp.value = GE.lerp(m.material.uniforms.uOp.value, st.released ? .25 : (m===small?.84:.55), k5*.5); });
-  ['E','P','A'].forEach(n=>{ sites[n].box.visible = sites[n].edge.visible = !st.released; sites[n].label.show = !st.released; });
+  ['E','P','A'].forEach(n=>{
+    const on = !st.released; sites[n].box.visible = sites[n].edge.visible = on; if(sites[n].glow) sites[n].glow.visible = on;
+    sites[n].label.show = on;
+    if(on && sites[n].glow){ const hot = (n==='A' && st.await!==null && st.await>0) || (n==='P' && (st.await===0 || st.holder>=0)) || (n==='E' && st.r>0);
+      sites[n].glow.material.opacity = hot ? (.2 + Math.sin(t*5)*.08) : .08; }
+  });
   S.riboLabel.show = !st.released;
   // tRNA
   trnas.forEach((g,k)=>{
@@ -115,6 +122,8 @@ function poses(t, dt){
     else if(k < st.entered){ tgt = anchorOf(k); }
     else { tgt = trnas[k].position.clone().add(new THREE.Vector3(0,3.2,0)); vis = false; }
     m.position.lerp(tgt, k5*.8); m.visible = vis || trnas[k].visible; if(!(k < st.entered) && !st.released) m.visible = trnas[k].visible && trnas[k].userData.op > .3;
+    const grow = (k < st.len) ? (1.05 + Math.sin(t*4+k)*.06) : 1;
+    m.scale.setScalar(GE.lerp(m.scale.x || 1, grow, .15));
     m.userData.lab.show = m.visible && !st.released && k >= st.len;
   });
   bonds.forEach((b,k)=>{ const on = k+1 < st.len; b.visible = on; if(on) orient(b, aaMeshes[k].position, aaMeshes[k+1].position); });
@@ -168,11 +177,23 @@ function ui(msg, cls){
       box.appendChild(b);
     });
   }
-  // 肽链
-  const pep = GE.$('#tl-pep'); let ph = '';
+  // A/P/E 位点高亮（教材：位点1=P，位点2=A；E 为拓展）
+  const sb = GE.$('#tl-sites');
+  if(sb){
+    const pOn = st.await===0 || (!st.released && st.holder>=0);
+    const aOn = st.await!==null && st.await>0;
+    const eOn = st.r>0 && !st.released;
+    sb.querySelector('.P').classList.toggle('on', !!pOn);
+    sb.querySelector('.A').classList.toggle('on', !!aOn);
+    sb.querySelector('.E').classList.toggle('on', !!eOn);
+  }
+  // 肽链（增长时闪一下）
+  const pep = GE.$('#tl-pep'); const prevLen = +pep.dataset.len || 0; let ph = '';
   for(let k=0;k<st.len;k++){ ph += (k?'<span class="bond"></span>':'') + `<span class="aa" style="background:${GE.AA_COLOR[AAS[k]]}">${GE.aaName(AAS[k])}</span>`; }
-  pep.innerHTML = ph || '<span class="dim" style="font-size:.85em">（尚未开始）</span>';
-  GE.$('#tl-mrna').innerHTML = C.map((c,k)=>`<span style="${ak===k?'color:#ffc857;text-decoration:underline':''}">${c}</span>`).join(' ');
+  pep.innerHTML = ph || '<span class="dim" style="font-size:.85em">（尚未开始 · N端在左）</span>';
+  pep.dataset.len = st.len;
+  if(st.len > prevLen){ pep.classList.remove('grow-flash'); void pep.offsetWidth; pep.classList.add('grow-flash'); setTimeout(()=>pep.classList.remove('grow-flash'),700); }
+  GE.$('#tl-mrna').innerHTML = C.map((c,k)=>`<span style="${ak===k?'color:#ffc857;text-decoration:underline;font-weight:700':''}">${c}</span>`).join(' ');
   GE.$('#tl-play').textContent = playing ? '❚❚' : '▶';
 }
 function choose(cd, el){

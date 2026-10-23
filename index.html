@@ -32,26 +32,31 @@
   <section class="sec" id="sec-home" data-title="首页">
     <div class="three-host" id="home-3d"></div>
     <div class="home-overlay">
-      <div class="home-tag">人教版 · 高中生物学 必修2《遗传与进化》 · 第4章 基因的表达</div>
+      <div class="home-badge-row">
+        <div class="home-tag">人教版 · 高中生物学 必修2《遗传与进化》 · 第4章 基因的表达</div>
+        <div class="home-live"><span class="hud-dot"></span> LIVE · 投影就绪</div>
+      </div>
+      <div class="home-mission-chip">MISSION 01 · GENE → PROTEIN</div>
       <h1 class="home-title"><span class="glitch" data-text="基因指导蛋白质的合成">基因指导蛋白质的合成</span></h1>
-      <div class="home-sub">FROM GENE TO PROTEIN · 一段DNA，如何“写”出一个蛋白质？</div>
+      <div class="home-sub">FROM GENE TO PROTEIN · 一段 DNA，如何“写”出一个蛋白质？</div>
       <div class="home-keys">
         <span>转录</span><i></i><span>翻译</span><i></i><span>遗传密码</span><i></i><span>中心法则</span>
       </div>
       <div class="home-btns">
-        <button class="btn-neon big" data-go="dive">进入细胞 <em>→</em></button>
-        <button class="btn-ghost" data-go="mission">直接闯关</button>
+        <button class="btn-neon big cta-pulse" data-go="dive"><span class="cta-ring"></span>进入细胞纵深 <em>→</em></button>
+        <button class="btn-ghost big-ghost" data-go="mission">⚠ 启动闯关任务</button>
       </div>
+      <div class="home-hint">建议投屏全屏 · 按 <kbd>F</kbd> · 教师控制条始终在底部</div>
       <div class="home-goals glass">
         <div class="hud-title">学习目标 / OBJECTIVES</div>
         <ol>
           <li>概述遗传信息的<b>转录</b>过程：场所、模板、原料、酶与碱基互补配对。</li>
-          <li>阐明遗传信息的<b>翻译</b>过程，说出密码子、反密码子与tRNA的关系。</li>
+          <li>阐明遗传信息的<b>翻译</b>过程，说出密码子、反密码子与 tRNA 的关系。</li>
           <li>运用数学方法分析碱基与氨基酸的对应关系，理解<b>密码子的简并</b>。</li>
           <li>概述<b>中心法则</b>，认同生命是物质、能量和信息的统一体。</li>
         </ol>
       </div>
-      <div class="home-meta">深圳实验学校高中园 · 高中生物学公开课</div>
+      <div class="home-meta">深圳实验学校高中园 · 高中生物学公开课 · 高三生物</div>
     </div>
     <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
   </section>
@@ -177,6 +182,11 @@
       </div>
       <div class="dock-row pick-row">
         <div class="pick-target">
+          <div class="site-badges" id="tl-sites">
+            <span class="site-b E" title="拓展：E位（离开）">E<small>离开</small></span>
+            <span class="site-b P on" title="教材位点1 · P位">P<small>位点1</small></span>
+            <span class="site-b A" title="教材位点2 · A位">A<small>位点2</small></span>
+          </div>
           <small id="tl-codon-label">当前密码子 5'→3'</small>
           <div class="target-base codon" id="tl-codon">AUG</div>
         </div>
@@ -329,14 +339,15 @@
 
 <!-- Teacher control bar -->
 <div id="teacherbar" class="glass">
+  <span class="tb-label">教师控制</span>
   <button id="tb-prev" title="上一步 (←)">◀ 上一步</button>
   <button id="tb-next" class="primary" title="下一步 (→)">下一步 ▶</button>
   <span class="sep"></span>
   <button id="tb-reset" title="重置本节 (R)">↺ 重置</button>
   <button id="tb-answer" title="隐藏/显示答案 (H)">◐ 隐藏答案</button>
   <button id="tb-full" title="全屏 (F)">⛶ 全屏</button>
-  <button id="tb-help" title="快捷键 (?)">⌨</button>
-  <button id="tb-fold" title="收起">—</button>
+  <button id="tb-help" title="快捷键 (?)">⌨ 快捷键</button>
+  <button id="tb-fold" title="收起">▾</button>
 </div>
 <button id="teacherbar-open" class="glass" title="展开教师控制条">☰ 教师控制</button>
 

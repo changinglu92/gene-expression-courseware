@@ -9,10 +9,26 @@ function hud(){ GE.$('#ms-score').textContent = score(); GE.$('#ms-prog').textCo
 
 function intro(){
   cur = -1; hud();
-  body().innerHTML = `<div class="ms-intro glass"><span class="ms-alert">⚠ CELL ALERT · 细胞警报</span><h2>${MS.title}</h2><p>${MS.intro}</p>
+  body().innerHTML = `<div class="ms-intro glass">
+    <span class="ms-alert">⚠ CELL ALERT · 细胞警报 · LEVEL RED</span>
+    <h2>${MS.title}</h2>
+    <div class="ms-brief-meta">
+      <div><b>CASE HX-7</b><span>目标细胞 · 肝细胞</span></div>
+      <div><b>08 ROOMS</b><span>线索密室 · 逐间推理</span></div>
+      <div><b>AGENT MODE</b><span>课堂剧本杀 · 限时挑战</span></div>
+    </div>
+    <p><b>任务简报：</b>${MS.intro}</p>
+    <div class="hud-title" style="margin-top:1.1em">行动路线 · ROUTE MAP</div>
     <div class="ms-rooms">${R.map((r,i)=>`<span>${String(i+1).padStart(2,'0')} ${r.room.split('·')[1].trim()}</span>`).join('')}</div>
-    <div class="ms-rules"><span>🔍 点击线索卡翻开证据</span><span>✔ 一次答对 +100</span><span>↻ 第二次答对 +50</span><span>✘ 两次答错揭晓答案</span></div>
-    <button class="btn-neon big" id="ms-start">开始调查 <em>→</em></button></div>`;
+    <div class="ms-rules">
+      <span>🔍 先翻开线索卡，再作答</span>
+      <span>✔ 一次推理正确 +100</span>
+      <span>↻ 第二次答对 +50</span>
+      <span>✘ 两次失误将揭晓答案</span>
+      <span>🧑‍🏫 教师可用 → 逐步揭晓</span>
+    </div>
+    <button class="btn-neon big" id="ms-start">接受任务 · 开始调查 <em>→</em></button>
+  </div>`;
   GE.$('#ms-start').onclick = ()=> room(0);
 }
 function room(i){

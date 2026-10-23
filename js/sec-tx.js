@@ -101,7 +101,7 @@ function poses(t){
 /* ---------- UI ---------- */
 const STEPS = {
   1:['第1步 · 解旋','RNA聚合酶与DNA结合，DNA双链解开，双链的碱基得以暴露。'],
-  2:['第2步 · 配对','游离的核糖核苷酸随机地与DNA链上的碱基碰撞，当核糖核苷酸与DNA的碱基互补时，两者以<b>氢键</b>结合。'],
+  2:['第2步 · 配对','游离的核糖核苷酸与模板链碱基碰撞；遵循 <b>A–U、T–A、G–C、C–G</b> 互补时，以<b>氢键</b>结合。注意：RNA 中是 <b>U</b>，没有 T。'],
   3:['第3步 · 连接','在RNA聚合酶的作用下，新结合的核糖核苷酸连接到正在合成的mRNA分子上，mRNA沿 <b>5\'→3\'</b> 方向延伸。'],
   4:['第4步 · 释放','合成的mRNA从DNA链上释放，而后DNA双链恢复成双螺旋结构。mRNA 将通过<b>核孔</b>进入细胞质。']
 };
@@ -120,6 +120,8 @@ function ui(){
   GE.$('#tx-count').textContent = Math.min(s,N);
   const cur = s<N ? D.template[s] : '—';
   const tg = GE.$('#tx-target'); tg.textContent = cur; tg.style.color = s<N ? GE.BASE_CSS[cur] : '';
+  const slot = GE.$('#tx-slot');
+  if(slot){ slot.classList.toggle('wait', s<N && mode==='manual' && !playing); if(s>=N) slot.innerHTML = '<span>完成</span>'; else if(mode==='auto') slot.innerHTML = '<span>自动中</span>'; else slot.innerHTML = '<span>拖到这里<br>或点击碱基</span>'; }
   let h = `<span class="end">5'</span>`;
   for(let k=0;k<N;k++){ const gap = k%3===2 ? ' gap' : ''; h += k < s ? `<span class="nt${gap}" style="background:${GE.BASE_CSS[D.mrna[k]]}">${D.mrna[k]}</span>` : `<span class="ph${gap}" style="${gap?'margin-right:6px':''}"></span>`; }
   GE.$('#tx-mrna').innerHTML = h + `<span class="end">3'</span>`;
@@ -129,19 +131,23 @@ function ui(){
 }
 function setS(v, msg, cls){ s = GE.clamp(v,0,N+1); if(s>N) close = 0; ui(); status(msg, cls); }
 function attempt(b, chip){
-  if(s>=N) return;
+  if(s>=N || mode==='auto') return;
   const tb = D.template[s], ok = GE.txPair[tb];
-  if(b===ok){ GE.beep('ok'); chip && flashChip(chip,'good'); setS(s+1, `✔ 模板链 ${tb} — ${b}（${GE.BASE_NAME[b]}核糖核苷酸）配对成功`, 'flash'); if(s===N) GE.toast('转录完成！按“下一步”释放 mRNA','ok'); }
-  else {
+  if(b===ok){
+    GE.beep('ok'); chip && flashChip(chip,'good');
+    const slot = GE.$('#tx-slot'); if(slot){ slot.classList.add('hot'); setTimeout(()=>slot.classList.remove('hot'),420); }
+    setS(s+1, `✔ 配对成功：模板链 <b>${tb}</b>（${GE.BASE_NAME[tb]}）— <b>${b}</b>（${GE.BASE_NAME[b]}核糖核苷酸）`, 'flash');
+    if(s===N) GE.toast('转录完成！按“下一步”释放 mRNA，送往翻译工厂','ok');
+  } else {
     GE.beep('bad'); chip && flashChip(chip,'bad');
     let m;
-    if(b==='T') m = `✘ RNA 中没有 <b>T（胸腺嘧啶）</b>！转录的原料是核糖核苷酸，模板链上的 ${tb} 应与 <b>${ok}</b> 配对。`;
-    else if(b===tb) m = `✘ 相同的碱基不能配对。请遵循碱基互补配对原则：模板 ${tb} → <b>${ok}</b>。`;
-    else m = `✘ 配对错误：模板链上是 <b>${tb}</b>（${GE.BASE_NAME[tb]}），应与 <b>${ok}</b> 配对。提示：A–U、T–A、G–C、C–G。`;
+    if(b==='T') m = `✘ RNA 中没有 <b>T（胸腺嘧啶）</b>！转录原料是核糖核苷酸，模板链 ${tb} 应与 <b>${ok}</b> 配对。`;
+    else if(b===tb) m = `✘ 相同碱基不能配对。碱基互补配对：模板 ${tb} → <b>${ok}</b>。`;
+    else m = `✘ 配对错误：模板链是 <b>${tb}</b>（${GE.BASE_NAME[tb]}），应对 <b>${ok}</b>。口诀：A–U、T–A、G–C、C–G。`;
     status(m,'err'); GE.toast(m.replace(/<[^>]+>/g,''),'err');
   }
 }
-function flashChip(c,k){ c.classList.remove('good','bad'); void c.offsetWidth; c.classList.add(k); setTimeout(()=>c.classList.remove(k),600); }
+function flashChip(c,k){ c.classList.remove('good','bad'); void c.offsetWidth; c.classList.add(k); setTimeout(()=>c.classList.remove(k), k==='good'?750:650); }
 function setupPool(){
   const pool = GE.$('#tx-pool');
   ['A','U','G','C','T'].forEach(b=>{
